@@ -4,13 +4,13 @@
 # Creates maven modules based on a project.
 #
 # Changelog
-# Version 0: - Hardcoded group id, package data, archetype and others. Not ready for general use.
-# Version 1: - Fetches the Group Id from pom.xml.
-#            - Constans are now read-only (added -r switch)
-# Version 2: - Checks if the module being created is a Parent or Child module, switching archetypes
+# Version 0  : - Hardcoded group id, package data, archetype and others. Not ready for general use.
+# Version 0.1: - Fetches the Group Id from pom.xml.
+#              - Constans are now read-only (added -r switch)
+# Version 0.2: - Checks if the module being created is a Parent or Child module, switching archetypes
 #              accordingly
-# Version 3: - Archetype parameters externalized as environment variables, making the script way more flexible.
-#            - This version marks the point where it is usable by other developers
+# Version 1.0: - Archetype parameters externalized as environment variables, making the script way more flexible.
+#              - This version marks the point where it is usable by other developers
 #
 # Future Features
 # - Force confirmation switch "-y"
@@ -169,8 +169,15 @@ help() {
     echo "$USAGE_MESSAGE"
 }
 
+version() {
+    echo -n "$(basename "$0") -"
+    grep '^# Version ' "$0" | tail -1 | cut -d : -f 1 | tr -d \#
+    echo
+}
+
 main() {
     configure
+    version
 
     if isValid; then
         if confirmation; then module; fi
