@@ -36,3 +36,7 @@ This script aims to make your life creating and adding more submodules to a mave
   - *CHILD_ARCHETYPE_GROUP_ID*     : the child module archetype group id
   - *DEFAULT_GROUP_ID*             : a default group id, used when no group id is defined by arguments
 
+## Tmux
+
+TBD
+
