@@ -156,8 +156,7 @@ bar {
         tray_output primary
 }
 
-bindsym mod4+l exec i3lock -c 000000
-
+# Move workspaces between outputs
 bindsym $mod+x move workspace to output right
 
 # Volume Controls - Depends on: amixer
@@ -202,7 +201,30 @@ bindsym Print exec "scrot ~/Pictures/screenshots/screenshot-$(date +%F%H:%M:%S).
 bindsym --release Mod4+Print exec "scrot -u ~/Pictures/screenshots/screenshot-$(date +%F%H:%M:%S).png 'xclip -selection c -t image/png < $f'"
 
 # Toggle Touchpad - Depends on: toggle-device.sh
-bindsym Control+Shift+F7 exec "toggle-device 15" # 15 is the device id of my touchpad
+bindsym Control+Shift+F7 exec "toggle-device 14"
 
 # Simple Calendar - Depends on: gsimplecal
 bindsym Mod4+c exec gsimplecal
+
+# Application Startup
+## Dropbox - Depends on: Dropbox
+exec dropbox
+
+## Zazu  Depends on: zazu
+exec zazu
+for_window [class="zazu"] floating enable
+
+## Network Manager Applet - Depends on: nm-applet
+exec --no-startup-id nm-applet
+
+# Workspaces Startup
+## Web
+exec i3-msg workspace 1; exec google-chrome
+exec i3-msg workspace 1; exec terminator
+
+## Rambox
+exec i3-msg workspace 2; exec rambox
+
+## Tasks Dashboard
+exec i3-msg workspace 4; exec google-chrome
+
