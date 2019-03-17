@@ -3,7 +3,10 @@
 # Install Docker - version 1
 #
 # Installs docker CE on a Debian based Linux Distribution. The steps executed here are
-# described at docker installation guide for ubuntu (https://docs.docker.com/install/linux/docker-ce/ubuntu/).
+# described at docker installation guide for ubuntu at:
+#  - https://docs.docker.com/install/linux/docker-ce/ubuntu/).
+#  - https://docs.docker.com/install/linux/linux-postinstall/
+#
 # This script intends to detect the current debian distribution and select the correct docker repository
 # accordingly, making it reusable between distrutions. The getCurrentDistribution is the function that
 # executes the distribution identification logic and is the primary extension point of this script, if
@@ -35,6 +38,8 @@ Note: this script will install the following packages if needed:
     - curl
     - gnupg-agent
     - software-properties-common
+    - groupadd
+    - usermod
 "
 
 declare -r ELEMENTARY_JUNO="juno"
@@ -79,13 +84,27 @@ installDocker() {
   sudo apt-get update
   sudo apt-get install -y docker-ce docker-ce-cli containerd.io
 
-  echo "Done!"
+  echo "Installation Successful!"
 }
+
+postInstallSteps() {
+  echo "Starting post installation producedures"
+
+  echo "Manage docker as a non-root user"
+  sudo groupadd docker
+  sudo usermod -aG docker $USER
+  
+  echo "Post installation procedures done!"
+}
+
 
 main() {
   help
   getCurrentDistribution
   installDocker
+  postInstallSteps
+
+  echo "Docker installation process complete!"
 }
 
 main
