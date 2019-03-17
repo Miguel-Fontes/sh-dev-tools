@@ -5,6 +5,7 @@
 # Installs git with the mininal configuration 
 #
 # Dependencies:
+#   - sudo
 #   - apt-get (only on debian based distributions)
 
 declare -r USER_NAME=$1
