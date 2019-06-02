@@ -29,7 +29,7 @@ help() {
 }
 
 getChangedFilesList() {
-    echo "$(git status -s | sed -e 's/ M//g' -e 's/M //g' -e 's/??//g' -e 's/ D//g' -e 's/R //g' -e 's/A //g' | awk -F ' ' '{print $NF}')"
+    echo "$(git status -s | cut -c 4- | awk -F ' ' '{print $NF}')"
 }
 
 stageFiles() {
