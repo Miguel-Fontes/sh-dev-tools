@@ -1,14 +1,15 @@
 set runtimepath+=~/.vim_runtime
 
-source ~/.vim_runtime/vimrcs/basic.vim
-source ~/.vim_runtime/vimrcs/filetypes.vim
-source ~/.vim_runtime/vimrcs/plugins_config.vim
-source ~/.vim_runtime/vimrcs/extended.vim
+@REM Inclusões do https://github.com/amix/vimrc. Desabilitadas.
+@REM source ~/.vim_runtime/vimrcs/basic.vim
+@REM source ~/.vim_runtime/vimrcs/filetypes.vim
+@REM source ~/.vim_runtime/vimrcs/plugins_config.vim
+@REM source ~/.vim_runtime/vimrcs/extended.vim
 
-try
-source ~/.vim_runtime/my_configs.vim
-catch
-endtry
+@REM try
+@REM source ~/.vim_runtime/my_configs.vim
+@REM catch
+@REM endtry
 
 if empty(glob('~/.vim/autoload/plug.vim'))
     silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -27,9 +28,6 @@ Plug 'plasticboy/vim-markdown'
 
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
-Plug 'tmux-plugins/vim-tmux'
-
-Plug 'MattesGroeger/vim-bookmarks'
 
 call plug#end()
 
@@ -94,6 +92,8 @@ set shiftwidth=4
 
 " Turn on line numbers
 set number
+" Turn on relative line numbers
+set relativenumber
 
 " Highlight tailing whitespace
 " See issue: https://github.com/Integralist/ProVim/issues/4
