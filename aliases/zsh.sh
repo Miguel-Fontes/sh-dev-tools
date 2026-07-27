@@ -2,4 +2,4 @@
 
 # ZSH Configuration Shortcuts
 alias zshupd='source ~/.zshrc && echo "Zsh configuration file reloaded!"' 
-alias zshcfg='vim ~/.zshrc'
+alias zshcfg="${EDITOR:-vim} ~/.zshrc"
