@@ -36,7 +36,8 @@
 (use-package obsidian
   :demand t
   :custom
-  (obsidian-directory "~/dev/vault-tech-assistant/vault")
+  (obsidian-directory (or (getenv "EMACS_OBSIDIAN_VAULT_DIRECTORY")
+                           (error "Defina a variável de ambiente EMACS_OBSIDIAN_VAULT_DIRECTORY")))
   (obsidian-inbox-directory "calendar")
   :config
   (global-obsidian-mode t)
@@ -67,3 +68,7 @@
 (use-package kkp
   :demand t
   :config (global-kkp-mode +1))
+
+;; -- Magit: interface Git -> C-x g ---
+(use-package magit
+  :bind ("C-x g" . magit-status))
