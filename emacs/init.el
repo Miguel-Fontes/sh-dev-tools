@@ -36,6 +36,7 @@
 
 ;; --- obsidian.el: vault estilo Obsidian dentro do Emacs ---
 (use-package obsidian
+  :if (getenv "EMACS_OBSIDIAN_VAULT_DIRECTORY")
   :demand t
   :custom
   (obsidian-directory (or (getenv "EMACS_OBSIDIAN_VAULT_DIRECTORY")
