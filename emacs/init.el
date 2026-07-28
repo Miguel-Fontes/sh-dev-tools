@@ -24,6 +24,8 @@
   :init (marginalia-mode))
 
 ;; --- Markdown: base para editar o vault ---
+(require 'ox-md)
+
 (use-package markdown-mode
   :mode ("\\.md\\'" . markdown-mode)
   :custom (markdown-enable-wiki-links t))
