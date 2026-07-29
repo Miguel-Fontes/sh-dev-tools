@@ -13,6 +13,25 @@
 (require 'use-package)
 (setopt use-package-always-ensure t)
 
+;; --- Configurações Globais ---
+(global-display-line-numbers-mode 1)
+
+;; --- Keybindings ---
+(use-package org
+  :ensure nil
+  :bind ("C-c a" . org-agenda)
+  :config (require 'org-tempo))
+
+;; yasnippet: snippets de texto
+(use-package yasnippet
+  :config (yas-global-mode 1))
+
+;; ---  Centraliza backups/auto-saves para não sujarem os repositórios ---
+(make-directory "~/.emacs.d/backups/" t)
+(make-directory "~/.emacs.d/auto-saves/" t)
+(setq backup-directory-alist '(("." . "~/.emacs.d/backups/"))
+      auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-saves/" t)))
+
 ;; --- Completação: UI incremental + fuzzy estilo fzf ---
 (use-package vertico
   :init (vertico-mode))
@@ -47,6 +66,33 @@
               ("C-c C-p" . obsidian-jump)
               ("C-c C-l" . obsidian-insert-wikilink)
               ("C-c b"   . obsidian-backlinks-mode)))
+
+
+;; -- Racket dev de racket (racket-mode + REPL conectado) ---
+(use-package racket-mode
+  :mode ("\\.rkt\\'" . racket-mode)
+  :hook (racket-mode . racket-xp-mode)) ; análise em background xref, docs (C-c C-d), erros on-the-fly
+
+(use-package paredit
+  :hook ((racket-mode           . enable-paredit-mode)
+	 (racket-repl-mode      . enable-paredit-mode)
+	 (emacs-lisp-mode       . enable-paredit-mode)
+	 (list-interaction-mode . enable-paredit-mode)))
+		      
+;; --- Magit: Git no Emacs
+(use-package magit
+  :bind ("C-x g" . magit-status)) ; ponto de entrada: status do repositório
+
+;; --- org-babel + ob-racket: rodar blocos racket dentro de .org ---
+(use-package ob-racket
+  :after org
+  :vc (:url "https://github.com/hasu/emacs-ob-racket" :rev :newest)
+  :config
+  (add-hook 'ob-racket-pre-runtime-library-load-hook
+            #'ob-racket-raco-make-runtime-library)
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   (append org-babel-load-languages '((racket . t)))))
 
 ;; --- Treino de digitação - Utilitários
 
