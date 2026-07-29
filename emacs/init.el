@@ -16,9 +16,6 @@
 ;; --- Configurações Globais ---
 (global-display-line-numbers-mode 1)
 
-;; --- org mode config ---
-
-
 ;; --- Keybindings ---
 (use-package org
   :ensure nil
