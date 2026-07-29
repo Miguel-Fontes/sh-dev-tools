@@ -3,6 +3,8 @@ keybind=clear
 # então Cmd+C / Cmd+V voltam a funcionar mesmo com left_super=alt
 keybind = super+shift+c=copy_to_clipboard
 keybind = super+shift+v=paste_from_clipboard
+keybind = ctrl+shift+c=copy_to_clipboard
+keybind = ctrl+shift+v=paste_from_clipboard
 
 # Command esquerdo passa a agir como Alt (pros binds Alt+... do zellij)
 key-remap = left_super=alt
@@ -12,6 +14,5 @@ macos-option-as-alt = left
 # theme = matrix
 # theme = breeze
 # theme = carbonfox
- theme = dark+
-# theme = darkside
+theme = dark+
 # theme = doomone

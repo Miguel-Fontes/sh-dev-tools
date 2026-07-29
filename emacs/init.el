@@ -43,6 +43,8 @@
   :init (marginalia-mode))
 
 ;; --- Markdown: base para editar o vault ---
+(require 'ox-md)
+
 (use-package markdown-mode
   :mode ("\\.md\\'" . markdown-mode)
   :custom (markdown-enable-wiki-links t))
@@ -53,9 +55,11 @@
 
 ;; --- obsidian.el: vault estilo Obsidian dentro do Emacs ---
 (use-package obsidian
+  :if (getenv "EMACS_OBSIDIAN_VAULT_DIRECTORY")
   :demand t
   :custom
-  (obsidian-directory "~/dev/vault-tech-assistant/vault")
+  (obsidian-directory (or (getenv "EMACS_OBSIDIAN_VAULT_DIRECTORY")
+                           (error "Defina a variável de ambiente EMACS_OBSIDIAN_VAULT_DIRECTORY")))
   (obsidian-inbox-directory "calendar")
   :config
   (global-obsidian-mode t)
@@ -113,3 +117,7 @@
 (use-package kkp
   :demand t
   :config (global-kkp-mode +1))
+
+;; -- Magit: interface Git -> C-x g ---
+(use-package magit
+  :bind ("C-x g" . magit-status))
