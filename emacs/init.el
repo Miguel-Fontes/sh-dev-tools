@@ -16,10 +16,21 @@
 ;; --- Configurações Globais ---
 (global-display-line-numbers-mode 1)
 
+;; --- org mode config ---
+
+
 ;; --- Keybindings ---
 (use-package org
   :ensure nil
   :bind ("C-c a" . org-agenda)
+  :custom
+  ;; Três estados; o "|" marca IN-PROGRESS como não-terminado (entra no C-c a t)
+  (org-todo-keywords '((sequence "TODO(t)" "IN-PROGRESS(i)" "|" "DONE(d)")))
+  ;; Só IN-PROGRESS ganha cor própria; TODO/DONE herdam as faces padrão do Org
+  ;; Ciano escuro, não azul-claro: org-level-1 já é Blue1 e o fundo é claro,
+  ;; então um azul-claro some no fundo E encosta no azul da própria headline.
+  ;; Hex explícito — nomes "color-NNN" NÃO existem com o Emacs em truecolor.
+  (org-todo-keyword-faces '(("IN-PROGRESS" . (:foreground "#0087AF" :weight bold))))
   :config (require 'org-tempo))
 
 ;; yasnippet: snippets de texto
