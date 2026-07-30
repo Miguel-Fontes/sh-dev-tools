@@ -16,6 +16,17 @@
 ;; --- Configurações Globais ---
 (global-display-line-numbers-mode 1)
 
+;; --- Org Mode Config ---
+(setq org-directory "~/org")
+(setq org-default-notes-file (concat org-directory "/notes.org"))
+(setq org-capture-templates
+      '(("t" "Task" entry (file+headline "~/org/inbox.org" "Inbox")
+         "* TODO %^{Título} %U")
+	("f" "Code TO DO" entry (file+headline "~/org/inbox.org" "Inbox")
+         "* TODO %^{Título} %U\n  %i\n  %a")
+        ("j" "Journal" entry (file+olp+datetree "~/org/journal.org")
+         "* %?\nEntered on %U\n  %i\n  %a")))
+
 ;; --- Keybindings ---
 (use-package org
   :ensure nil
@@ -28,6 +39,8 @@
   ;; então um azul-claro some no fundo E encosta no azul da própria headline.
   ;; Hex explícito — nomes "color-NNN" NÃO existem com o Emacs em truecolor.
   (org-todo-keyword-faces '(("IN-PROGRESS" . (:foreground "#0087AF" :weight bold))))
+  ;; C-c C-t só cicla (TODO -> IN-PROGRESS -> DONE); sem isso, C-c C-t abre um menu perguntando o estado
+  (org-use-fast-todo-selection nil)
   :config (require 'org-tempo))
 
 ;; yasnippet: snippets de texto
