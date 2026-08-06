@@ -19,18 +19,39 @@
 ;; --- Org Mode Config ---
 (setq org-directory "~/org")
 (setq org-default-notes-file (concat org-directory "/notes.org"))
+
+;; EMACS_PROFILE define no shell de cada máquina: "work" ou "personal"
+;; (mesmo padrão de EMACS_OBSIDIAN_VAULT_DIRECTORY, abaixo)
+(defvar my/emacs-profile (getenv "EMACS_PROFILE")
+  "Perfil da máquina atual: \"work\", \"personal\" ou nil.")
+
+(defvar my/org-capture-templates-common
+  '(("t" "Task" entry (file+headline "~/org/inbox.org" "Inbox")
+     "* TODO %^{Título} %U")
+    ("f" "Code TO DO" entry (file+headline "~/org/inbox.org" "Inbox")
+     "* TODO %^{Título} %U\n  %i\n  %a")
+    ("j" "Journal" entry (file+olp+datetree "~/org/journal.org")
+     "* %?\nEntered on %U\n  %i\n  %a")))
+
+(defvar my/org-capture-templates-work
+  '(("a" "Fatos Equipe" entry (file+olp+datetree "~/org/team-facts.org")
+     "* %?\n Registrado em %U\n %i\n %a")))
+
+(defvar my/org-capture-templates-personal
+  '())
+
 (setq org-capture-templates
-      '(("t" "Task" entry (file+headline "~/org/inbox.org" "Inbox")
-         "* TODO %^{Título} %U")
-	("f" "Code TO DO" entry (file+headline "~/org/inbox.org" "Inbox")
-         "* TODO %^{Título} %U\n  %i\n  %a")
-        ("j" "Journal" entry (file+olp+datetree "~/org/journal.org")
-         "* %?\nEntered on %U\n  %i\n  %a")))
+      (append my/org-capture-templates-common
+              (pcase my/emacs-profile
+                ("work" my/org-capture-templates-work)
+                ("personal" my/org-capture-templates-personal)
+                (_ nil))))
 
 ;; --- Keybindings ---
 (use-package org
   :ensure nil
-  :bind ("C-c a" . org-agenda)
+  :bind (("C-c a" . org-agenda)
+	 ("C-c c" . org-capture))
   :custom
   ;; Três estados; o "|" marca IN-PROGRESS como não-terminado (entra no C-c a t)
   (org-todo-keywords '((sequence "TODO(t)" "IN-PROGRESS(i)" "|" "DONE(d)")))
