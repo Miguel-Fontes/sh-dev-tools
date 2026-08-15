@@ -62,7 +62,10 @@
   ;; Ciano escuro, não azul-claro: org-level-1 já é Blue1 e o fundo é claro,
   ;; então um azul-claro some no fundo E encosta no azul da própria headline.
   ;; Hex explícito — nomes "color-NNN" NÃO existem com o Emacs em truecolor.
-  (org-todo-keyword-faces '(("IN-PROGRESS" . (:foreground "#0087AF" :weight bold))))
+  (org-todo-keyword-faces
+   '(("TODO"        . (:foreground "#1E1E2E" :background "#F38BA8" :weight bold))
+     ("IN-PROGRESS" . (:foreground "#1E1E2E" :background "#89DCEB" :weight bold))
+     ("DONE"        . (:foreground "#1E1E2E" :background "#A6E3A1" :weight bold))))
   ;; C-c C-t só cicla (TODO -> IN-PROGRESS -> DONE); sem isso, C-c C-t abre um menu perguntando o estado
   (org-use-fast-todo-selection nil)
   :config (require 'org-tempo))
