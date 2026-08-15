@@ -1,5 +1,8 @@
 ;;; init.el --- Emacs para editar o vault-tech-assistant  -*- lexical-binding: t; -*-
 
+;; --- Configura pacotes customizados
+(load "~/sh-dev-tools/emacs/obsidi.el")
+
 ;; --- Isola o ruído do Customize num arquivo separado ---
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file 'noerror)
@@ -74,13 +77,17 @@
   :ensure nil
   :init (which-key-mode))
 
+(use-package obsidi.el
+  :ensure nil
+  :bind ("C-c n" . new-note-from-template))
+
 ;; --- obsidian.el: vault estilo Obsidian dentro do Emacs ---
 (use-package obsidian
   :if (getenv "EMACS_OBSIDIAN_VAULT_DIRECTORY")
   :demand t
   :custom
   (obsidian-directory (or (getenv "EMACS_OBSIDIAN_VAULT_DIRECTORY")
-                           (error "Defina a variável de ambiente EMACS_OBSIDIAN_VAULT_DIRECTORY")))
+                          (error "Defina a variável de ambiente EMACS_OBSIDIAN_VAULT_DIRECTORY")))
   (obsidian-inbox-directory "calendar")
   :config
   (global-obsidian-mode t)
