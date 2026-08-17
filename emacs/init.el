@@ -16,6 +16,9 @@
 (require 'use-package)
 (setopt use-package-always-ensure t)
 
+;; --- Pacotes pessoas ---
+(load "~/sh-dev-tools/emacs/code-review")
+
 ;; --- Configurações Globais ---
 (global-display-line-numbers-mode 1)
 
@@ -95,7 +98,7 @@
 
 (use-package markdown-mode
   :mode ("\\.md\\'" . markdown-mode)
-  :custom (markdown-enable-wiki-links t))
+  :custom (markdown-enable-wiki-links ))
 
 (use-package which-key
   :ensure nil
