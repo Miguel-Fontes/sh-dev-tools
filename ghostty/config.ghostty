@@ -16,3 +16,5 @@ macos-option-as-alt = left
 # theme = carbonfox
 theme = dark+
 # theme = doomone
+
+font-family = "MesloLGS Nerd Font"

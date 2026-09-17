@@ -16,8 +16,8 @@
 (require 'use-package)
 (setopt use-package-always-ensure t)
 
-;; --- Pacotes pessoas ---
-(load "~/sh-dev-tools/emacs/code-review")
+;; --- Pacotes pessoais ---
+;(load "~/sh-dev-tools/emacs/code-review")
 
 ;; --- Configurações Globais ---
 (global-display-line-numbers-mode 1)
@@ -66,7 +66,7 @@
   ;; então um azul-claro some no fundo E encosta no azul da própria headline.
   ;; Hex explícito — nomes "color-NNN" NÃO existem com o Emacs em truecolor.
   (org-todo-keyword-faces
-   '(("TODO"        . (:foreground "#1E1E2E" :background "#F38BA8" :weight bold))
+   '(("TODO"        . (:foreground "#CDD6F4" :background "#6C7086" :weight bold))
      ("IN-PROGRESS" . (:foreground "#1E1E2E" :background "#89DCEB" :weight bold))
      ("DONE"        . (:foreground "#1E1E2E" :background "#A6E3A1" :weight bold))))
   ;; C-c C-t só cicla (TODO -> IN-PROGRESS -> DONE); sem isso, C-c C-t abre um menu perguntando o estado
